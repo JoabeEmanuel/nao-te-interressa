@@ -1,0 +1,35 @@
+# Código de senha e login aleatório
+import PySimpleGUI as sg
+import random
+
+# gera senha aleatória
+password = str(random.randint(1000, 9999))
+print(password)
+# define layout da interface gráfica
+layout = [
+    [sg.Text('Senha:'), sg.Input(key='password', password_char='*')],
+    [sg.Button('Login')]
+]
+
+# cria janela com layout definido
+window = sg.Window('Login', layout)
+
+# loop principal para capturar eventos
+while True:
+    event, values = window.read()
+
+    # verifica se o botão de login foi pressionado
+    if event == 'Login':
+        # verifica se a senha inserida é igual à senha aleatória gerada
+        if values['password'] == password:
+            sg.popup('Login bem-sucedido!')
+            break
+        else:
+            sg.popup('Senha incorreta. Tente novamente.')
+
+    # verifica se a janela foi fechada
+    if event == sg.WINDOW_CLOSED:
+        break
+
+# fecha janela
+window.close()
